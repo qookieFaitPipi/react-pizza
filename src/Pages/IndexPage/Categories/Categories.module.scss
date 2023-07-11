@@ -1,0 +1,80 @@
+.categories {
+  margin-top: 40px;
+
+  .categoriesContent {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .categoriesNav {
+      display: flex;
+
+      .categoriesNavItem {
+        margin-right: 25px;
+        background-color: #F9F9F9;
+        padding: 15px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .categoriesNavItemActive {
+        margin-right: 25px;
+        background-color: #282828;
+        padding: 15px;
+        color: #fff;
+        border-radius: 30px;
+        font-weight: 600;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+    .categoriesSort {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      .categoriesSortTop {
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+        cursor: pointer;
+
+        .arrowImage {
+          width: 10px;
+          height: 5px;
+          margin-right: 5px;
+          
+        }
+        .categoriesSortTopText {
+          font-weight: 600;
+          font-size: 16px;
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+      }
+      .none {
+        display: none;
+      }
+      .categoriesSortPopupActive {
+        display: block;
+        position: absolute;
+        top: 30px;
+        background-color: #fff;
+        border: 1px #ebebeb solid;
+        border-radius: 10px;
+        padding: 15px;
+
+        .categoriesSortPopupItem {
+          cursor: pointer;
+          margin-top: 8px;
+          transition: 0.3s;
+        }
+        .categoriesSortPopupItem:hover {
+          color: #FE5F1E;
+        }
+      }
+    }
+  }
+}
