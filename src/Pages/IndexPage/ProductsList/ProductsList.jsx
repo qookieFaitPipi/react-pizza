@@ -2,11 +2,13 @@ import React from 'react';
 import styles from './ProductsList.module.scss';
 
 import Product from './Product/Product';
+import ProductSkeleton from './ProductSkeleton/ProductSkeleton';
 
-const ProductsList = () => {
+const ProductsList = (props) => {
   const onSearch = (event) => {
     //props.setSearchValue(event.target.value);
   }
+
   return (
     <div className={styles.productsList}>
       <div className={styles.productsListContent}>
@@ -15,7 +17,20 @@ const ProductsList = () => {
           <input className={styles.logoSearchInput} onChange={onSearch} placeholder='Поиск...' type="text" />
         </div>
         <div className={styles.productsListMainBlock}>
-          <Product />
+          {props.loadingState ?
+            props.productList.map((obj) => {
+              return <Product
+                key={obj.id} 
+                id={obj.id}
+                title={obj.title}
+                price={obj.price}
+                imageUrl={obj.imageURL}
+                category={obj.category}
+              />
+            })
+            :
+            [...new Array(9)].map((_, index) => <ProductSkeleton key={index} />)
+          }
         </div>
       </div>
     </div>

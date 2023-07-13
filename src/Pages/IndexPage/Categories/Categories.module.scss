@@ -39,7 +39,6 @@
       .categoriesSortTop {
         display: flex;
         align-items: center;
-        margin-right: 25px;
         cursor: pointer;
 
         .arrowImage {
@@ -72,6 +71,12 @@
           transition: 0.3s;
         }
         .categoriesSortPopupItem:hover {
+          color: #FE5F1E;
+        }
+
+        .categoriesSortPopupItemActive {
+          cursor: pointer;
+          margin-top: 8px;
           color: #FE5F1E;
         }
       }

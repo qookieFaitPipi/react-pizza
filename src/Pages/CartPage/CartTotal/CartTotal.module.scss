@@ -1,0 +1,49 @@
+.cartTotal {
+  margin-top: 40px;
+  
+  .cartTotalContent {
+    display: flex;
+    justify-content: space-around;
+
+    .cartTotalLeftBlock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .cartTotalLeftText {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+      .cartTotalLeftInput {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px #D3D3D3 solid;
+        cursor: pointer;
+      }
+    }
+    .cartTotalRightBlock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .cartTotalRightText {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+      .cartTotalRightInput {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 20px;
+        color: #fff;
+        background-color: #FE5F1E;
+        border: 1px #FE5F1E solid;
+        cursor: pointer;
+      }
+    }
+  }
+}

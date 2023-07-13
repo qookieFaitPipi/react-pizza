@@ -4,9 +4,19 @@ import styles from './Categories.module.scss';
 // images
 import arrowTop from './../../../Assets/images/icons/arrow-top.svg';
 
-const Categories = () => {
+const Categories = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [popupActive, setPopupActive] = useState(false);
+
+  const changeCategory = (id) => {
+    fetch('http://0.0.0.0:5000/get_products/category/' + id)
+    .then(response => response.json())
+    .then(data => props.setProductList(data)).catch(()=>{
+      alert("Ошибка. Проверьте подключение");
+    })
+    console.log(id)
+    props.setSortCategoryType(id)
+  }
 
   return (
     <div className={styles.categories}>
@@ -46,12 +56,24 @@ const Categories = () => {
         <div className={styles.categoriesSort}>
           <div className={styles.categoriesSortTop} onClick={() => setPopupActive(!popupActive)}>
             <img className={styles.arrowImage} src={arrowTop} alt="arrow-top" />
-            <div className={styles.categoriesSortTopText}>Сортировка по</div>
+            <div className={styles.categoriesSortTopText}>Сортировка по {props.sortCategoryType === 0 ? 'популярности' : props.sortCategoryType === 1 ? 'цене' : props.sortCategoryType === 2 ? 'алфавиту' : 'nothing'}</div>
           </div>
           <div className={popupActive ? styles.categoriesSortPopupActive : styles.none}>
-            <div className={styles.categoriesSortPopupItem}>популярности</div>
-            <div className={styles.categoriesSortPopupItem}>цене</div>
-            <div className={styles.categoriesSortPopupItem}>алфавиту</div>
+            <div 
+              onClick={() => changeCategory(0)} 
+              className={props.sortCategoryType === 0 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              популярности
+            </div>
+            <div 
+              onClick={() => changeCategory(1)} 
+              className={props.sortCategoryType === 1 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              цене
+            </div>
+            <div 
+              onClick={() => changeCategory(2)} 
+              className={props.sortCategoryType === 2 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              алфавиту
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 .product {
-  margin-top: 40px;
+  margin: 40px;
 
   .productContent {
     display: flex;
@@ -13,8 +13,9 @@
 
       .productImage {
         margin-top: 15px;
-        width: 260px;
-        height: 260px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
       }
     }
     .productTitleBlock {
