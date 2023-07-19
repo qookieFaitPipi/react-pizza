@@ -13,22 +13,24 @@ class Products(db.Model):
   title = db.Column(db.String(100), nullable=False)
   price = db.Column(db.Integer, nullable=False)
   imageURL = db.Column(db.String(100), nullable=False)
-  category = db.Column(db.Integer, nullable=False)
+  product_type = db.Column(db.Integer, nullable=False)
+  product_category = db.Column(db.Integer, nullable=False)
+
 
 @host.route('/get_products')
 def get_products():
   items = Products.query.order_by(Products.id).all()
-  items = list(map(lambda el: {'id': el.id, 'key': el.key, 'title': el.title, 'price': el.price, 'category': el.category, 'imageURL': 'http://0.0.0.0:5000/' + el.imageURL}, items))
+  items = list(map(lambda el: {'id': el.id, 'key': el.key, 'title': el.title, 'price': el.price, 'product_type': el.product_type, 'product_category': el.product_category, 'imageURL': 'http://0.0.0.0:5000/' + el.imageURL}, items))
   return jsonify(items)
 
-@host.route('/get_products/category/<int:type>', methods=['GET'])
+@host.route('/get_products/type/<int:type>', methods=['GET'])
 def get_products_category(type):
   if type == 0:
     items = Products.query.order_by(Products.id).all()
   else:
-    items = Products.query.filter_by(category=type).all()
+    items = Products.query.filter_by(product_type=type).all()
   
-  items = list(map(lambda el: {'id': el.id, 'key': el.key, 'title': el.title, 'price': el.price, 'category': el.category, 'imageURL': 'http://0.0.0.0:5000/' + el.imageURL}, items))
+  items = list(map(lambda el: {'id': el.id, 'key': el.key, 'title': el.title, 'price': el.price, 'product_type': el.product_type, 'product_category': el.product_category, 'imageURL': 'http://0.0.0.0:5000/' + el.imageURL}, items))
   return jsonify(items)
 
 if __name__ == "__main__":

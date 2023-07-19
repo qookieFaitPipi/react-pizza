@@ -1,15 +1,40 @@
 import React, {useState } from 'react';
 import styles from './Product.module.scss';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { addToCart } from '../../../../redux/slices/cartSlice';
+
 const Product = (props) => {
   const [type, setType] = useState(0);
   const [size, setSize] = useState(0);
+
+  const {totalPice, countProducts, cart} = useSelector((state) => state.cartSlice);
+  const dispatch = useDispatch()
+
+  const addProduct = () => {
+    const newItem = {
+      id: props.id,
+      key: props.id,
+      title: props.title,
+      price: props.price,
+      imageURL: props.imageURL
+    }
+    console.log(newItem)
+    dispatch(addToCart({
+      totalPice: props.price,
+      cart: newItem
+    }))
+  }
+
+  console.log(totalPice, countProducts, cart)
 
   return (
     <div className={styles.product}>
       <div className={styles.productContent}>
         <div className={styles.productImageBlock}>
-          <img className={styles.productImage} src={props.imageUrl} alt="pizza" />
+          <img className={styles.productImage} src={props.imageURL} alt="pizza" />
         </div>
         <div className={styles.productTitleBlock}>
           <div className={styles.productTitle}>{props.title}</div>
@@ -30,7 +55,7 @@ const Product = (props) => {
             <div className={styles.productPrice}>от {props.price} ₽</div>
           </div>
           <div className={styles.productAddBlock}>
-            <div className={styles.productAdd}>+ Добавить <div className={styles.productAddCount}>2</div></div>
+            <div className={styles.productAdd} onClick={addProduct}>+ Добавить <div className={styles.productAddCount}>1</div></div>
           </div>
         </div>
       </div>

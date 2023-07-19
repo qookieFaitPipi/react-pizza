@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from "axios";
 
 // components
 import Header from './Header/Header';
@@ -7,7 +8,6 @@ import ProductsList from './ProductsList/ProductsList';
 
 const IndexPage = () => {
   const [productList, setProductList] = useState([]);
-  const [sortCategoryType, setSortCategoryType] = useState(0);
   const [loadingState, setLoadingState] = useState(false);
 
   useEffect(() => {
@@ -15,26 +15,22 @@ const IndexPage = () => {
   }, [])
 
   useEffect(() => {
-    fetch('http://0.0.0.0:5000/get_products')
-    .then(response => response.json())
-    .then(data => setProductList(data) & setLoadingState(true)).catch(()=>{
-      alert("Ошибка. Проверьте подключение");
-    })
+    axios.get('http://0.0.0.0:5000/get_products').then((response) => {
+      setProductList(response.data)
+      setLoadingState(true)
+    });
   }, [])
 
   return (
     <section>
       <Header />
       <Categories 
+        productList={productList}
         setProductList={setProductList}
-        sortCategoryType={sortCategoryType}
-        setSortCategoryType={setSortCategoryType}
       />
       <ProductsList 
-        sortCategoryType={sortCategoryType}
         setLoadingState={setLoadingState}
-
-        productList={productList}         
+        productList={productList}
         loadingState={loadingState}
       />
     </section>

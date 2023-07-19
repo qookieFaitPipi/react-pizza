@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
+import axios from "axios";
 import styles from './Categories.module.scss';
 
 // images
 import arrowTop from './../../../Assets/images/icons/arrow-top.svg';
 
+// redux
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setSortType, setCategoryType } from '../../../redux/slices/filterSlice';
+
 const Categories = (props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [popupActive, setPopupActive] = useState(false);
 
-  const changeCategory = (id) => {
-    fetch('http://0.0.0.0:5000/get_products/category/' + id)
-    .then(response => response.json())
-    .then(data => props.setProductList(data)).catch(()=>{
-      alert("Ошибка. Проверьте подключение");
-    })
-    console.log(id)
-    props.setSortCategoryType(id)
+  const {categoryType, sortType} = useSelector((state) => state.filterSlice);
+  const dispatch = useDispatch()
+
+  const changeSortType = (sortType) => {
+    if(sortType === 0) {
+      let copy = Object.assign([], props.productList);
+      copy.sort((a, b) => a.title > b.title ? 1 : -1);
+      props.setProductList(copy); 
+    } else if(sortType === 1) {
+      let copy = Object.assign([], props.productList);
+      copy.sort((a, b) => a.price > b.price ? 1 : -1);
+      props.setProductList(copy); 
+    }
+    dispatch(setSortType({
+      sortType: sortType,
+    }))
+  }
+
+  const changeCategoryType = (categoryType) => {
+    axios.get('http://0.0.0.0:5000/get_products/type/' + categoryType).then((response) => {
+      props.setProductList(response.data)
+    });
+    dispatch(setCategoryType({
+      categoryType: categoryType,
+    }))
   }
 
   return (
@@ -23,55 +45,55 @@ const Categories = (props) => {
       <div className={styles.categoriesContent}>
         <div className={styles.categoriesNav}>
           <div 
-            onClick={() => setActiveIndex(0)} 
-            className={activeIndex === 0 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(0)} 
+            className={categoryType === 0 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Все
           </div>
           <div 
-            onClick={() => setActiveIndex(1)} 
-            className={activeIndex === 1 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(1)} 
+            className={categoryType === 1 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Мясные
           </div>
           <div 
-            onClick={() => setActiveIndex(2)} 
-            className={activeIndex === 2 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(2)} 
+            className={categoryType === 2 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Вегетарианские
           </div>
           <div 
-            onClick={() => setActiveIndex(3)} 
-            className={activeIndex === 3 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(3)} 
+            className={categoryType === 3 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Гриль
           </div>
           <div 
-            onClick={() => setActiveIndex(4)} 
-            className={activeIndex === 4 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(4)} 
+            className={categoryType === 4 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Острые
           </div>
           <div 
-            onClick={() => setActiveIndex(5)} 
-            className={activeIndex === 5 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
+            onClick={() => changeCategoryType(5)} 
+            className={categoryType === 5 ? styles.categoriesNavItemActive : styles.categoriesNavItem}>
             Закрытые
           </div>
         </div>
         <div className={styles.categoriesSort}>
           <div className={styles.categoriesSortTop} onClick={() => setPopupActive(!popupActive)}>
             <img className={styles.arrowImage} src={arrowTop} alt="arrow-top" />
-            <div className={styles.categoriesSortTopText}>Сортировка по {props.sortCategoryType === 0 ? 'популярности' : props.sortCategoryType === 1 ? 'цене' : props.sortCategoryType === 2 ? 'алфавиту' : 'nothing'}</div>
+            <div className={styles.categoriesSortTopText}>Сортировка по {sortType === 0 ? 'популярности' : sortType === 1 ? 'цене' : sortType === 2 ? 'алфавиту' : 'nothing'}</div>
           </div>
           <div className={popupActive ? styles.categoriesSortPopupActive : styles.none}>
             <div 
-              onClick={() => changeCategory(0)} 
-              className={props.sortCategoryType === 0 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              onClick={() => changeSortType(0)} 
+              className={sortType === 0 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
               популярности
             </div>
             <div 
-              onClick={() => changeCategory(1)} 
-              className={props.sortCategoryType === 1 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              onClick={() => changeSortType(1)} 
+              className={sortType === 1 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
               цене
             </div>
             <div 
-              onClick={() => changeCategory(2)} 
-              className={props.sortCategoryType === 2 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
+              onClick={() => changeSortType(2)} 
+              className={sortType === 2 ? styles.categoriesSortPopupItemActive : styles.categoriesSortPopupItem}>
               алфавиту
             </div>
           </div>
