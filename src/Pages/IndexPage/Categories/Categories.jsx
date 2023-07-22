@@ -17,7 +17,7 @@ const Categories = (props) => {
   const dispatch = useDispatch()
 
   const changeSortType = (sortType) => {
-    if(sortType === 0) {
+    if(sortType === 0 || sortType === 2) {
       let copy = Object.assign([], props.productList);
       copy.sort((a, b) => a.title > b.title ? 1 : -1);
       props.setProductList(copy); 
@@ -31,10 +31,14 @@ const Categories = (props) => {
     }))
   }
 
-  const changeCategoryType = (categoryType) => {
-    axios.get('http://0.0.0.0:5000/get_products/type/' + categoryType).then((response) => {
+  const changeCategoryType = async(categoryType) => {
+    try {
+      const response = await axios.get('http://0.0.0.0:5000/get_products/product_category/' + categoryType);
       props.setProductList(response.data)
-    });
+    } catch(err) {
+      console.log(err);
+    }
+
     dispatch(setCategoryType({
       categoryType: categoryType,
     }))

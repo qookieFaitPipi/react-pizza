@@ -1,39 +1,57 @@
 import React, {useState } from 'react';
 import styles from './Product.module.scss';
 
+// react-router-dom
+import { useNavigate } from "react-router-dom";
+
 // redux
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { addToCart } from '../../../../redux/slices/cartSlice';
+import { addToSelect } from '../../../../redux/slices/selectSlice';
 
 const Product = (props) => {
+  const [isAdded, setIsAdded] = useState(false);
   const [type, setType] = useState(0);
   const [size, setSize] = useState(0);
 
-  const {totalPice, countProducts, cart} = useSelector((state) => state.cartSlice);
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const addProduct = () => {
+    if(isAdded) {
+      return
+    }
+    setIsAdded(!isAdded);
     const newItem = {
       id: props.id,
       key: props.id,
       title: props.title,
       price: props.price,
-      imageURL: props.imageURL
+      imageURL: props.imageURL,
+      params: {
+        type: type,
+        size: size
+      }
     }
-    console.log(newItem)
     dispatch(addToCart({
       totalPice: props.price,
       cart: newItem
     }))
   }
 
-  console.log(totalPice, countProducts, cart)
+  const selectProduct = () => {
+    navigate('/product/' + props.id);
+    dispatch(addToSelect({
+      title: props.title,
+      imageURL: props.imageURL,
+      price: props.price,
+    }))
+  }
 
   return (
     <div className={styles.product}>
       <div className={styles.productContent}>
-        <div className={styles.productImageBlock}>
+        <div className={styles.productImageBlock} onClick={selectProduct}>
           <img className={styles.productImage} src={props.imageURL} alt="pizza" />
         </div>
         <div className={styles.productTitleBlock}>
@@ -55,7 +73,7 @@ const Product = (props) => {
             <div className={styles.productPrice}>от {props.price} ₽</div>
           </div>
           <div className={styles.productAddBlock}>
-            <div className={styles.productAdd} onClick={addProduct}>+ Добавить <div className={styles.productAddCount}>1</div></div>
+            <div className={styles.productAdd} onClick={addProduct}>{isAdded ? 'В корзине' : '+ Добавить'}<div className={styles.productAddCount}>1</div></div>
           </div>
         </div>
       </div>

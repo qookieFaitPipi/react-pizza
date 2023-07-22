@@ -14,12 +14,20 @@ export const cartSlice = createSlice({
       state.countProducts += 1;
       state.cart.push(action.payload.cart);
     },
-    removeFromCart: (state, action) => {
-      
+    deleteFromCart: (state, action) => {
+      let index = state.cart.indexOf(action.payload.item);
+      state.cart.splice(index, 1);
+      state.totalPice -= action.payload.totalPice;
+      state.countProducts -= 1;
+    },
+    deleteAllCart: (state, action) => {
+      state.totalPice = 0;
+      state.countProducts = 0;
+      state.cart = []
     },
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, deleteFromCart, deleteAllCart } = cartSlice.actions
 
 export default cartSlice.reducer 

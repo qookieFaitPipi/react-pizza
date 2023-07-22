@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 // components
-import Header from './Header/Header';
+import Header from '../../universal/Header/Header';
 import Categories from './Categories/Categories';
 import ProductsList from './ProductsList/ProductsList';
 

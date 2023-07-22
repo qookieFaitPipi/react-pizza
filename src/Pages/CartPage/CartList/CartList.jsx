@@ -2,26 +2,44 @@ import React from 'react';
 import styles from './CartList.module.scss';
 
 // images
-import cart from './../../../Assets/images/icons/cart.png';
+import cartImage from './../../../Assets/images/icons/cart.png';
 
 // components
 import CartProduct from './CartProduct/CartProduct';
 
+// redux
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {deleteAllCart} from './../../../redux/slices/cartSlice';
+
 const CartList = () => {
+  const {cart} = useSelector((state) => state.cartSlice);
+  const dispatch = useDispatch()
+
   return (
     <div className={styles.cartList}>
       <div className={styles.cartListContent}>
         <div className={styles.cartsListTopBlock}>
           <div className={styles.cartListTitleBlock}>
-            <img width='29px' height='29px' src={cart} alt="" />
+            <img width='29px' height='29px' src={cartImage} alt="" />
             <div className={styles.cartListTitle}>Все пиццы</div>
           </div>
           <div className={styles.cartListDeteleBlock}>
-            <div className={styles.cartListDeleteText}>Очистить корзину</div>
+            <div className={styles.cartListDeleteText} onClick={() => dispatch(deleteAllCart())}>Очистить корзину</div>
           </div>
         </div>
         <div className={styles.cartListMainBlock}>
-          <CartProduct />
+          {cart.map((obj) => {
+            return <CartProduct
+              key={obj.id} 
+              id={obj.id}
+              title={obj.title}
+              price={obj.price}
+              imageURL={obj.imageURL}
+              category={obj.category}
+              params={obj.params}
+            />
+          })}
         </div>
       </div>
     </div>
