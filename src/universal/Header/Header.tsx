@@ -11,7 +11,7 @@ import cart from './../../Assets/images/icons/cart.svg';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const {totalPice, countProducts} = useSelector((state) => state.cartSlice);
+  const {totalPice, countProducts} = useSelector((state: any) => state.cartSlice);
 
   return (
     <div className={styles.header}>

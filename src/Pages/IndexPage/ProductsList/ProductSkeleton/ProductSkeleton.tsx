@@ -1,7 +1,7 @@
 import React from "react"
 import ContentLoader from "react-content-loader"
 
-const ProductSkeleton = (props) => (
+const ProductSkeleton: React.FC = () => (
   <ContentLoader style={{margin: '40px'}}
     speed={2}
     width={220}
@@ -9,7 +9,6 @@ const ProductSkeleton = (props) => (
     viewBox="0 0 220 460"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
-    {...props}
   >
     <circle cx="110" cy="123" r="110" /> 
     <rect x="0" y="257" rx="10" ry="10" width="220" height="27" /> 

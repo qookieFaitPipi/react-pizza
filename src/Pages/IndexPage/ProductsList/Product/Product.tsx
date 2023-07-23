@@ -9,7 +9,15 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../../redux/slices/cartSlice';
 import { addToSelect } from '../../../../redux/slices/selectSlice';
 
-const Product = (props) => {
+type ProductProps = {
+  id: number;
+  title: string;
+  price: number;
+  imageURL: string;
+  category: number;
+};
+
+const Product: React.FC<ProductProps> = (props) => {
   const [isAdded, setIsAdded] = useState(false);
   const [type, setType] = useState(0);
   const [size, setSize] = useState(0);

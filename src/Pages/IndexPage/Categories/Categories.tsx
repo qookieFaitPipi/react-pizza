@@ -10,20 +10,29 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setSortType, setCategoryType } from '../../../redux/slices/filterSlice';
 
-const Categories = (props) => {
+type ProductsListItem = {
+  id: number;
+  key: number;
+  title: string;
+  price: number;
+  product_category: number;
+  imageURL: string;
+}
+
+const Categories = (props: any) => {
   const [popupActive, setPopupActive] = useState(false);
 
-  const {categoryType, sortType} = useSelector((state) => state.filterSlice);
+  const {categoryType, sortType} = useSelector((state: any) => state.filterSlice);
   const dispatch = useDispatch()
 
-  const changeSortType = (sortType) => {
+  const changeSortType = (sortType: number) => {
     if(sortType === 0 || sortType === 2) {
       let copy = Object.assign([], props.productList);
-      copy.sort((a, b) => a.title > b.title ? 1 : -1);
+      copy.sort((a: ProductsListItem, b: ProductsListItem) => a.title > b.title ? 1 : -1);
       props.setProductList(copy); 
     } else if(sortType === 1) {
       let copy = Object.assign([], props.productList);
-      copy.sort((a, b) => a.price > b.price ? 1 : -1);
+      copy.sort((a: ProductsListItem, b: ProductsListItem) => a.price > b.price ? 1 : -1);
       props.setProductList(copy); 
     }
     dispatch(setSortType({
@@ -31,7 +40,7 @@ const Categories = (props) => {
     }))
   }
 
-  const changeCategoryType = async(categoryType) => {
+  const changeCategoryType = async(categoryType: number) => {
     try {
       const response = await axios.get('http://0.0.0.0:5000/get_products/product_category/' + categoryType);
       props.setProductList(response.data)

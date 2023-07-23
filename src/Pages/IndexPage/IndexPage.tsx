@@ -6,9 +6,18 @@ import Header from '../../universal/Header/Header';
 import Categories from './Categories/Categories';
 import ProductsList from './ProductsList/ProductsList';
 
-const IndexPage = () => {
-  const [productList, setProductList] = useState([]);
-  const [loadingState, setLoadingState] = useState(false);
+type ProductsListItem = {
+  id: number;
+  key: number;
+  title: string;
+  price: number;
+  product_category: number;
+  imageURL: string;
+}
+
+const IndexPage: React.FC = () => {
+  const [productList, setProductList] = useState<ProductsListItem[]>([]);
+  const [loadingState, setLoadingState] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0,0);

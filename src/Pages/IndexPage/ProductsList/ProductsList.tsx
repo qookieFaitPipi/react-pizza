@@ -4,21 +4,21 @@ import styles from './ProductsList.module.scss';
 import Product from './Product/Product';
 import ProductSkeleton from './ProductSkeleton/ProductSkeleton';
 
-const ProductsList = (props) => {
-  const onSearch = (event) => {
-    //props.setSearchValue(event.target.value);
-  }
+const ProductsList = (props: any) => {
+  /*const onSearch = (event) => {
+    props.setSearchValue(event.target.value);
+  }*/
 
   return (
     <div className={styles.productsList}>
       <div className={styles.productsListContent}>
         <div className={styles.productsListTopBlock}>
           <div className={styles.productsListTitle}>Все пиццы</div>
-          <input className={styles.logoSearchInput} onChange={onSearch} placeholder='Поиск...' type="text" />
+          <input className={styles.logoSearchInput} placeholder='Поиск...' type="text" />
         </div>
         <div className={styles.productsListMainBlock}>
           {props.loadingState ?
-            props.productList.map((obj) => {
+            props.productList.map((obj: any) => {
               return <Product
                 key={obj.id} 
                 id={obj.id}

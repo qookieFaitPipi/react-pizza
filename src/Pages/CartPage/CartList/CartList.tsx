@@ -10,10 +10,10 @@ import CartProduct from './CartProduct/CartProduct';
 // redux
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {deleteAllCart} from './../../../redux/slices/cartSlice';
+import {deleteAllCart} from '../../../redux/slices/cartSlice';
 
-const CartList = () => {
-  const {cart} = useSelector((state) => state.cartSlice);
+const CartList: React.FC = () => {
+  const {cart} = useSelector((state: any) => state.cartSlice);
   const dispatch = useDispatch()
 
   return (
@@ -25,11 +25,11 @@ const CartList = () => {
             <div className={styles.cartListTitle}>Все пиццы</div>
           </div>
           <div className={styles.cartListDeteleBlock}>
-            <div className={styles.cartListDeleteText} onClick={() => dispatch(deleteAllCart())}>Очистить корзину</div>
+            <div className={styles.cartListDeleteText} onClick={() => dispatch(deleteAllCart(null))}>Очистить корзину</div>
           </div>
         </div>
         <div className={styles.cartListMainBlock}>
-          {cart.map((obj) => {
+          {cart.map((obj: any) => {
             return <CartProduct
               key={obj.id} 
               id={obj.id}

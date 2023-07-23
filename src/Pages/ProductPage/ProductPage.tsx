@@ -4,7 +4,7 @@ import React from 'react';
 import Header from '../../universal/Header/Header';
 import ProductInfo from './ProductInfo/ProductInfo';
 
-const ProductPage = () => {
+const ProductPage: React.FC = () => {
   return (
     <section>
       <Header />

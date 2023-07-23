@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 // redux
 import { useSelector } from 'react-redux';
 
-const ProductInfo = () => {
-  const {title, imageURL, description, price} = useSelector((state) => state.selectSlice);
+const ProductInfo: React.FC = () => {
+  const {title, imageURL, description, price} = useSelector((state: any) => state.selectSlice);
 
   return (
     <div className={styles.productInfo}>

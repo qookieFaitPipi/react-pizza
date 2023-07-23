@@ -5,7 +5,21 @@ import styles from './CartProduct.module.scss';
 import { useDispatch } from 'react-redux';
 import { deleteFromCart } from '../../../../redux/slices/cartSlice';
 
-const CartProduct = (props) => {
+type ParamsType = {
+  type: string;
+  size: number;
+}
+
+type CartProductProps = {
+  id: number;
+  title: string;
+  price: number;
+  imageURL: string;
+  category: number;
+  params: ParamsType
+}
+
+const CartProduct: React.FC<CartProductProps> = (props) => {
   const dispatch = useDispatch()
 
   const deleteProduct = () => {

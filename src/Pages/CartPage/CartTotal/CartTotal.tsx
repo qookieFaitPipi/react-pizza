@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 // redux
 import { useSelector } from 'react-redux';
 
-const CartTotal = () => {
-  const {totalPice, countProducts} = useSelector((state) => state.cartSlice);
+const CartTotal: React.FC = () => {
+  const {totalPice, countProducts} = useSelector((state: any) => state.cartSlice);
   
   return (
     <div className={styles.cartTotal}>

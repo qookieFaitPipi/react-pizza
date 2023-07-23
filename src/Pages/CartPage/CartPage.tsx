@@ -5,7 +5,7 @@ import Header from '../../universal/Header/Header';
 import CartList from './CartList/CartList';
 import CartTotal from './CartTotal/CartTotal';
 
-const CartPage = () => {
+const CartPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0,0);
   }, [])
