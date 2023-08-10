@@ -5,25 +5,20 @@ import styles from './Product.module.scss';
 import { useNavigate } from "react-router-dom";
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../../redux/store';
 import { addToCart } from '../../../../redux/slices/cartSlice';
-import { addToSelect } from '../../../../redux/slices/selectSlice';
+import { pickProduct } from '../../../../redux/slices/productSlice';
 
-type ProductProps = {
-  id: number;
-  title: string;
-  price: number;
-  imageURL: string;
-  category: number;
-};
+// types
+import { ProductItemType } from '../../../../@types/types';
 
-const Product: React.FC<ProductProps> = (props) => {
-  const [isAdded, setIsAdded] = useState(false);
-  const [type, setType] = useState(0);
-  const [size, setSize] = useState(0);
+const Product: React.FC<ProductItemType> = (props) => {
+  const [isAdded, setIsAdded] = useState<boolean>(false);
+  const [type, setType] = useState<number>(0);
+  const [size, setSize] = useState<number>(0);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const addProduct = () => {
     if(isAdded) {
@@ -49,11 +44,7 @@ const Product: React.FC<ProductProps> = (props) => {
 
   const selectProduct = () => {
     navigate('/product/' + props.id);
-    dispatch(addToSelect({
-      title: props.title,
-      imageURL: props.imageURL,
-      price: props.price,
-    }))
+    dispatch(pickProduct(props));
   }
 
   return (

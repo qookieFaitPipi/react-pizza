@@ -8,18 +8,18 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ProductInfo: React.FC = () => {
-  const {title, imageURL, description, price} = useSelector((state: any) => state.selectSlice);
+  const {pickProduct} = useSelector((state: any) => state.productSlice);
 
   return (
     <div className={styles.productInfo}>
       <div className={styles.productInfoContent}>
         <div className={styles.productInfoImageBlock}>
-          <img className={styles.productInfoImage} src={imageURL} alt="" />
+          <img className={styles.productInfoImage} src={pickProduct.imageURL} alt="" />
         </div>
         <div className={styles.productInfoTextBlock}>
-          <div className={styles.productInfoTitle}>{title}</div>
-          <div className={styles.productInfoParams}>{description}</div>
-          <div className={styles.productInfoPrice}>Стоимость: {price}</div>
+          <div className={styles.productInfoTitle}>{pickProduct.title}</div>
+          <div className={styles.productInfoParams}>Не следует, однако забывать, что консультация с широким активом позволяет оценить значение системы обучения кадров, соответствует насущным потребностям. Товарищи! консультация с широким активом обеспечивает широкому кругу (специалистов) участие в формировании модели развития. Равным образом консультация с широким активом способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.</div>
+          <div className={styles.productInfoPrice}>Стоимость: {pickProduct.price}</div>
         </div>
       </div>
       <div className={styles.productInfoBackBlock}>

@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 // images
 import logo from './../../Assets/images/logo.svg';
 import cart from './../../Assets/images/icons/cart.svg';
+import user from './../../Assets/images/icons/user.png';
 
 // redux
 import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header: React.FC = () => {
   const {totalPice, countProducts} = useSelector((state: any) => state.cartSlice);
 
   return (
@@ -24,10 +25,13 @@ const Header = () => {
           </Link>
         </div>
         <div className={styles.headerRightBlock}>
-          <Link className={styles.headerIconBlock} to='/cart'>
+          <Link className={styles.headerCartBlock} to='/cart'>
             <span className={styles.headerTotalPrice}>{totalPice} ₽ |</span>
             <img className={styles.headerIconCard} src={cart} width='14px' height='14px' alt='cart'/>
             <div className={styles.headerIconCount}>{countProducts}</div>
+          </Link>
+          <Link className={styles.headerUserBlock} to='/user'>
+            <img className={styles.headerIconUser} src={user} alt="user" />
           </Link>
         </div>
       </div>

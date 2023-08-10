@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
 // components
-import Header from '../../universal/Header/Header';
+import Header from '../../Universal/Header/Header';
 import CartList from './CartList/CartList';
 import CartTotal from './CartTotal/CartTotal';
 

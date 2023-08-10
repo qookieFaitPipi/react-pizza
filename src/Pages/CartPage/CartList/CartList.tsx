@@ -25,7 +25,7 @@ const CartList: React.FC = () => {
             <div className={styles.cartListTitle}>Все пиццы</div>
           </div>
           <div className={styles.cartListDeteleBlock}>
-            <div className={styles.cartListDeleteText} onClick={() => dispatch(deleteAllCart(null))}>Очистить корзину</div>
+            <div className={styles.cartListDeleteText} onClick={() => dispatch(deleteAllCart())}>Очистить корзину</div>
           </div>
         </div>
         <div className={styles.cartListMainBlock}>

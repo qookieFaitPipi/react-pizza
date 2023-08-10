@@ -3,8 +3,10 @@
 
   .categoriesContent {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
 
     .categoriesNav {
       display: flex;

@@ -9,48 +9,41 @@ import arrowTop from './../../../Assets/images/icons/arrow-top.svg';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setSortType, setCategoryType } from '../../../redux/slices/filterSlice';
+import { setProductsState } from '../../../redux/slices/productSlice';
 
-type ProductsListItem = {
-  id: number;
-  key: number;
-  title: string;
-  price: number;
-  product_category: number;
-  imageURL: string;
-}
+// types
+import { ProductItemType } from '../../../@types/types';
 
-const Categories = (props: any) => {
+const Categories: React.FC = () => {
   const [popupActive, setPopupActive] = useState(false);
 
   const {categoryType, sortType} = useSelector((state: any) => state.filterSlice);
+  const {productList} = useSelector((state: any) => state.productSlice);
+
   const dispatch = useDispatch()
 
   const changeSortType = (sortType: number) => {
     if(sortType === 0 || sortType === 2) {
-      let copy = Object.assign([], props.productList);
-      copy.sort((a: ProductsListItem, b: ProductsListItem) => a.title > b.title ? 1 : -1);
-      props.setProductList(copy); 
+      let copy = Object.assign([], productList);
+      copy.sort((a: ProductItemType, b: ProductItemType) => a.title > b.title ? 1 : -1);
+      dispatch(setProductsState(copy));
     } else if(sortType === 1) {
-      let copy = Object.assign([], props.productList);
-      copy.sort((a: ProductsListItem, b: ProductsListItem) => a.price > b.price ? 1 : -1);
-      props.setProductList(copy); 
+      let copy = Object.assign([], productList);
+      copy.sort((a: ProductItemType, b: ProductItemType) => a.price > b.price ? 1 : -1);
+      dispatch(setProductsState(copy));
     }
-    dispatch(setSortType({
-      sortType: sortType,
-    }))
+    dispatch(setSortType(sortType))
   }
 
   const changeCategoryType = async(categoryType: number) => {
     try {
       const response = await axios.get('http://0.0.0.0:5000/get_products/product_category/' + categoryType);
-      props.setProductList(response.data)
+      dispatch(setProductsState(response.data));
     } catch(err) {
       console.log(err);
     }
 
-    dispatch(setCategoryType({
-      categoryType: categoryType,
-    }))
+    dispatch(setCategoryType(categoryType))
   }
 
   return (

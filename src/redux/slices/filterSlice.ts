@@ -1,6 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+// types
+import { FilterSliceState } from '../../@types/types';
+
+const initialState: FilterSliceState = {
   sortType: 0,
   categoryType: 0,
 }
@@ -9,10 +12,10 @@ export const filterSlice = createSlice({
   initialState: initialState,
   reducers: {
     setSortType: (state, action) => {
-      state.sortType = action.payload.sortType
+      state.sortType = action.payload;
     },    
     setCategoryType: (state, action) => {
-      state.categoryType = action.payload.categoryType
+      state.categoryType = action.payload;
     },
   },
 })
