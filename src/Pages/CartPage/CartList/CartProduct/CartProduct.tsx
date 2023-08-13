@@ -10,7 +10,7 @@ import { CartProductItemType } from '../../../../@types/types';
 
 const CartProduct: React.FC<CartProductItemType> = (props) => {
   const dispatch = useDispatch()
-
+  
   return (
     <div className={styles.cartProduct}>
       <div className={styles.cartProductContent}>    

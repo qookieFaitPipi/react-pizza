@@ -14,7 +14,7 @@ export const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.totalPice += action.payload.totalPice;
+      state.totalPice += action.payload.price;
       state.countProducts += 1;
       state.cart.push(action.payload.cart);
     },

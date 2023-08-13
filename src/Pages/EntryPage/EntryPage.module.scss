@@ -1,0 +1,131 @@
+.entryPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ebebeb;
+
+  .entryContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.07);
+
+    .entryTitleBlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+
+      .entryTitle {
+        font-size: 25px;
+      }
+
+      .entryDart {
+        color: #c42525;
+        font-size: 27px;
+        cursor: pointer;
+      }
+    }
+
+    .entryBodyBlock {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      .entryFormBlock {
+
+        .entryFormInput {
+          width: 300px;
+          height: 45px;
+          border-radius: 5px;
+          border: 1px #808080 solid;
+          outline: none;
+          margin: 10px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .entryBottomBlock {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+
+      .entryBackLink {
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+        opacity: 0.7;
+        transition: 0.5s;
+        border-bottom: 1px #fff solid;
+      }
+      .entryBackLink:hover {
+        opacity: 1;
+        border-bottom: 1px #808080 solid;
+      }
+      .entryContinueInput {
+        padding: 10px;
+        text-decoration: none;
+        background-color: #ebebeb;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #000;
+      }
+      .entryContinueInput:hover {
+        background-color: #808080;
+        transition: 0.5s;
+        color: #fff;
+      }
+    }
+  }
+
+  .entryBreakBlock {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #808080;
+    width: 50px;
+    height: 50px;
+    transition: 0.8s;
+    margin: 25px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    .entryBreakContent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-decoration: none;
+
+      .entryBreakText {
+        color: #fff;
+        white-space: nowrap;
+        display: block;
+      }
+      .entryBreakTextDisable {
+        display: none;
+      }
+      .entryBreakInput {
+        color: #fff;
+      }
+      .entryBreakInputDisable {
+        display: none;
+      }
+    }
+  }
+  .entryBreakBlock:hover {
+    width: 300px;
+  }
+}

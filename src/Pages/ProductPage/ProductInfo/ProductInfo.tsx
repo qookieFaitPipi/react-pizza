@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 const ProductInfo: React.FC = () => {
   const {pickProduct} = useSelector((state: any) => state.productSlice);
 
+  
+
   return (
     <div className={styles.productInfo}>
       <div className={styles.productInfoContent}>

@@ -1,0 +1,102 @@
+.userInfo {
+  width: 85%;
+  height: 100vh;
+  background-color: #ebebeb;
+
+  .userInfoContent {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+
+    .userInfoColumn {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      width: 500px;
+      border-radius: 10px;
+      height: 70%;
+
+      .userInfoItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &ImageBlock {
+          margin-top: 30px;
+
+          >img {
+            width: 180px;
+            height: 180px;
+          }
+        }
+        &TextBlock {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          margin-top: 30px;
+
+          .userInfoItemSupText {
+            color: #000;
+          }
+
+          .userInfoItemText {
+
+          }
+        }
+        &InputBlock {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+
+          .topBlock {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+
+            >input {
+              margin-top: 20px;
+              width: 180px;
+              height: 35px;
+              border-radius: 10px;
+              outline: none;
+              border: 1px #cccccc solid;
+            }
+          }
+
+          >input {
+            margin-top: 20px;
+            width: 300px;
+            height: 35px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px #cccccc solid;
+          }
+        }
+        &SaveBlock {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          margin-top: 160px;
+
+          .userInfoItemReverse {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px #cccccc solid;
+            cursor: pointer;
+          }
+          .userInfoItemSave {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px #cccccc solid;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

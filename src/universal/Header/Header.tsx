@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 const Header: React.FC = () => {
   const {totalPice, countProducts} = useSelector((state: any) => state.cartSlice);
+  const {userLogin} = useSelector((state: any) => state.userSlice);
 
   return (
     <div className={styles.header}>
@@ -30,8 +31,9 @@ const Header: React.FC = () => {
             <img className={styles.headerIconCard} src={cart} width='14px' height='14px' alt='cart'/>
             <div className={styles.headerIconCount}>{countProducts}</div>
           </Link>
-          <Link className={styles.headerUserBlock} to='/user'>
-            <img className={styles.headerIconUser} src={user} alt="user" />
+          <Link className={styles.headerUserBlock} to={userLogin ? '/user' : '/entry'}>
+            <img className={styles.headerUserIcon} src={user} alt="user" />
+            <div className={styles.heaaderUserNick}>{userLogin}</div>
           </Link>
         </div>
       </div>

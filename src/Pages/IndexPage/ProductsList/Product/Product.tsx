@@ -36,10 +36,7 @@ const Product: React.FC<ProductItemType> = (props) => {
         size: size
       }
     }
-    dispatch(addToCart({
-      totalPice: props.price,
-      cart: newItem
-    }))
+    dispatch(addToCart({price: props.price, cart: newItem}));
   }
 
   const selectProduct = () => {
