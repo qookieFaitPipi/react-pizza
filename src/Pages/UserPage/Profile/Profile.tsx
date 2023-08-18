@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
+import axios from 'axios';
 
 // components
 import TopProfile from './TopProfile/TopProfile';
@@ -7,10 +8,38 @@ import TopProfile from './TopProfile/TopProfile';
 // images
 import ava from './../../../Assets/images/logo.svg';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setSettings } from '../../../redux/slices/userSlice';
+
 const Profile: React.FC = () => {
-  const [userLogin, setUserLogin] = useState<string>('');
-  const [userTel, setUserTel] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string>('');
+  const [controlName, setControlName] = useState<string>('');
+  const [controlTel, setControlTel] = useState<string>('');
+  const [controlEmail, setControlEmail] = useState<string>('');
+
+  const {userId, userName, userTel, userEmail} = useSelector((state: any) => state.userSlice);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    setControlName(userName);
+    setControlTel(userTel);
+    setControlEmail(userEmail);
+  }, []);
+
+  const saveSettingsHandler = () => {
+    try {
+      axios.post("http://0.0.0.0:5000/save_user_settings/" + userId, { userName: controlName, userTel: controlTel, userEmail: controlEmail }).then((res) => {
+        dispatch(setSettings({
+          userName: controlName,
+          userTel: controlTel,
+          userEmail: controlEmail
+        }));
+      })
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className={styles.userInfo}>
@@ -27,14 +56,14 @@ const Profile: React.FC = () => {
             </div>
             <div className={styles.userInfoItemInputBlock}>
               <div className={styles.topBlock}>
-                <input value={userLogin} onChange={(e) => setUserLogin(e.target.value)} type="text" placeholder='login' />
-                <input value={userTel} onChange={(e) => setUserTel(e.target.value)} type="text" placeholder='tel' />
+                <input value={controlName} onChange={(e) => setControlName(e.target.value)} type="text" placeholder='login' />
+                <input value={controlTel} onChange={(e) => setControlTel(e.target.value)} type="text" placeholder='tel' />
               </div>
-              <input value={userEmail} onChange={(e) => setUserEmail(e.target.value)} type="text" placeholder='email' />
+              <input value={controlEmail} onChange={(e) => setControlEmail(e.target.value)} type="text" placeholder='email' />
             </div>
             <div className={styles.userInfoItemSaveBlock}>
               <div className={styles.userInfoItemReverse}>вернуть назад</div>
-              <div className={styles.userInfoItemSave}>Сохранить</div>
+              <div className={styles.userInfoItemSave} onClick={saveSettingsHandler}>Сохранить</div>
             </div>
           </div>
         </div>

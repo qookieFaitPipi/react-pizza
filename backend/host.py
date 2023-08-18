@@ -20,6 +20,9 @@ class Products(db.Model):
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   login = db.Column(db.String(100), nullable=False)
+  name = db.Column(db.String(100), nullable=True)
+  tel = db.Column(db.String(100), nullable=True)
+  email = db.Column(db.String(100), nullable=True)
   password = db.Column(db.String(600), nullable=False)
   rights = db.Column(db.Integer, nullable=False)
 
@@ -27,14 +30,13 @@ class User(db.Model):
 @host.route('/entry', methods=["POST"])
 def entry():
   data = request.get_json()
-  
-  item = User.query.filter_by(login=data['login']).first()
+  item = User.query.filter_by(login=data['userLogin']).first()
 
   if not item:
     return jsonify({"status": False})
   
   if check_password_hash(item.password, data['password']):
-    return jsonify({"status": True, "userLogin": data['login']})
+    return jsonify({"status": True, "userId": item.id, "userLogin": data['userLogin']})
   else:
     return jsonify({"status": False})
 
@@ -42,15 +44,14 @@ def entry():
 @host.route('/register', methods=["POST"])
 def register():
   data = request.get_json()
+  user = User.query.filter_by(login=data['userLogin']).first()
 
-  tmpItem = User.query.filter_by(login=data['login']).first()
-
-  if tmpItem:
+  if user:
     return jsonify({"status": False}) 
 
   hash = generate_password_hash(data['password'])
 
-  item = User(login=data['login'], password=hash, rights=0)
+  item = User(login=data['userLogin'], password=hash, rights=0)
 
   try:
     db.session.add(item)
@@ -59,6 +60,25 @@ def register():
 
   except:
     return jsonify({"status": False})
+
+
+@host.route('/save_user_settings/<int:id>', methods=["POST"])
+def save_user_settings(id):
+  data = request.get_json()
+  user = User.query.filter_by(id=id).first()
+  
+  user.name = data['userName']
+  user.tel = data['userTel']
+  user.email = data['userEmail']
+
+  try:
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"status": True})
+
+  except:
+    return jsonify({"status": False})
+
 
 
 @host.route('/get_products')

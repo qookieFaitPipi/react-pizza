@@ -4,7 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { UserSliceState } from '../../@types/types';
 
 const initialState: UserSliceState = {
+  userId: undefined,
   userLogin: undefined,
+  userName: undefined,
+  userTel: undefined,
+  userEmail: undefined,
   isEntered: false,
 }
 export const userSlice = createSlice({
@@ -12,12 +16,18 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: { 
     login: (state, action) => {
-      state.userLogin = action.payload;
+      state.userId = action.payload.userId
+      state.userLogin = action.payload.userLogin;
       state.isEntered = true;
+    },
+    setSettings: (state, action) => {
+      state.userName = action.payload.userName;
+      state.userTel = action.payload.userTel;
+      state.userEmail = action.payload.userEmail;
     }
   },
 })
 
-export const { login } = userSlice.actions
+export const { login, setSettings } = userSlice.actions
 
 export default userSlice.reducer 

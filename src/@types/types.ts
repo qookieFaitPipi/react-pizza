@@ -51,6 +51,10 @@ export interface FilterSliceState {
 
 // userSlice
 export interface UserSliceState {
+  userId: string | undefined
   userLogin: string | undefined;
+  userName: string | undefined;
+  userTel: string | undefined;
+  userEmail: string | undefined;
   isEntered: boolean;
 }

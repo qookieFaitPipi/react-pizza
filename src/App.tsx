@@ -19,7 +19,7 @@ function App() {
       <Route index path="/" element={<IndexPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/product/:id" element={<ProductPage />} />
-      <Route path="/user" element={<UserPage />} />
+      <Route path="/user/:id" element={<UserPage />} />
 
       <Route path="/entry" element={<EntryPage />} />
       <Route path="/register" element={<RegisterPage />} />

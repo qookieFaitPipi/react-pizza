@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
       return;
     }
     try {
-      axios.post('http://0.0.0.0:5000/register', {login: userLogin, password: userPassword}).then((response) => {
+      axios.post('http://0.0.0.0:5000/register', {userLogin: userLogin, password: userPassword}).then((response) => {
         if(response.data.status) {
           setUserLogin('');
           setUserPassword('');

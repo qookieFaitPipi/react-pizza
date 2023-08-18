@@ -22,10 +22,10 @@ const EntryPage: React.FC = () => {
       return;
     }
     try {
-      axios.post('http://0.0.0.0:5000/entry', {login: userLogin, password: userPassword}).then((response) => {
+      axios.post('http://0.0.0.0:5000/entry', {userLogin: userLogin, password: userPassword}).then((response) => {
         if(response.data.status) {
           navigate('/');
-          dispatch(login(userLogin))
+          dispatch(login({userId: response.data.userId, userLogin: userLogin}))
           setUserLogin('');
           setUserPassword('');
         } else {
